@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  postgres_newsfeed:
+    container_name: postgres_newsfeed
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: "postgres_newsfeed"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "devpass"
+    volumes:
+      - /var/pgdata:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+  api:
+    build: .
+    depends_on:
+      - postgres_newsfeed
+    restart: always
+    volumes:
+      - type: bind
+        source: ./config.yaml
+        target: /config.yaml
+    ports:
+      - "8082:8082"

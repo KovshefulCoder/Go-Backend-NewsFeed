@@ -1,0 +1,9 @@
+Dockerfile
+.gitignore
+.idea
+.git
+.gitattributes
+docker-compose.yml
+
+config.yaml
+config.go
